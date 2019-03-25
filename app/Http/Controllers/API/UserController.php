@@ -1,13 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Figoro
- * Date: 15.03.2019
- * Time: 17:15
- */
 
 namespace App\Http\Controllers\API;
-
 
 use App\Http\Controllers\Controller;
 use App\User;
@@ -17,19 +10,18 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-	public $successStatus = 200;
 	/**
 	 * login api
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public function login(){
+	public function login()
+	{
 		if(Auth::attempt(['email' => request('email'), 'password' => request('password')])){
 			$user = Auth::user();
-			$success['token'] =  $user->createToken('MyApp')-> accessToken;
-			return response()->json(['success' => $success], $this-> successStatus);
-		}
-		else{
+			$success['token'] =  $user->createToken('MyApp')->accessToken;
+			return response()->json(['success' => $success], 200);
+		} else {
 			return response()->json(['error'=>'Unauthorised'], 401);
 		}
 	}
@@ -52,9 +44,9 @@ class UserController extends Controller
 		$input = $request->all();
 		$input['password'] = bcrypt($input['password']);
 		$user = User::create($input);
-		$success['token'] =  $user->createToken('MyApp')-> accessToken;
-		$success['name'] =  $user->name;
-		return response()->json(['success'=>$success], $this-> successStatus);
+		$success['token'] = $user->createToken('MyApp')->accessToken;
+		$success['name'] = $user->name;
+		return response()->json(['success'=>$success], 200);
 	}
 	/**
 	 * details api
@@ -64,6 +56,6 @@ class UserController extends Controller
 	public function details()
 	{
 		$user = Auth::user();
-		return response()->json(['success' => $user], $this-> successStatus);
+		return response()->json(['success' => $user], 200);
 	}
 }

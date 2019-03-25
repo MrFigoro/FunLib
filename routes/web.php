@@ -19,7 +19,15 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/loginform', 'LoginFormController@loginform')->name('loginform');
+Route::get('/loginform', 'Web\UserController@login')->name('loginform');
 
-Route::post('/signin', 'LoginFormController@signin')->name('signin');
+Route::post('/signin', 'Web\UserController@signin')->name('signin');
+
+
+
+Route::get('user/', 'Admin\NewUserController@index')->name('index');
+Route::get('user/create', 'Admin\NewUserController@create')->name('create');
+Route::post('user/store', 'Admin\NewUserController@store')->name('save');
+Route::get('user/edit/{id?}', 'Admin\NewUserController@edit')->name('edit');
+Route::get('user/delete/{id}', 'Admin\NewUserController@destroy')->name('delete');
 
