@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Web\UserRequest;
+use App\Http\Requests\Admin\UserRequest;
 use App\System\Models\User;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
